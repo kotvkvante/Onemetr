@@ -89,4 +89,5 @@ def task3_solution():
     res = stdout.split(" ")
     print(res)
 
-    return "Rmax = {}\nRmin = {}".format(res[0], res[1])
+
+    return "L = {} mm\nEsL = {}mkm\nEiL = {}mkm".format(res[0], res[1], res[2])

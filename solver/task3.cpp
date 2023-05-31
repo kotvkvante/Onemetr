@@ -43,7 +43,8 @@ int main(int argc, char *argv[])
 
     L = d / 2 + D / 2 + S - EPC;
 
-
+    cout << L;
+    
     if (k == 1)
     {
         EsL = EsS + Eid / 2 + EiD / 2 - EsEPC;
