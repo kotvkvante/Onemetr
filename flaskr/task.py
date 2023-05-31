@@ -58,7 +58,7 @@ def task3():
 @bp.route("/task3_solution", methods=("POST", ))
 def task3_solution():
     dmax = request.form.get("dmax")
-    dmin = request.form.get("dmax")
+    dmin = request.form.get("dmin")
     Smax = request.form.get("Smax")
     Smin = request.form.get("Smin")
     EPCmax = request.form.get("EPCmax")
