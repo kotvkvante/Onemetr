@@ -15,26 +15,35 @@ def task4():
 
 @bp.route("/task4_solution", methods=("POST", ))
 def task4_solution():
-    R1 = request.form.get("R1")
-    R2 = request.form.get("R2")
-    R3 = request.form.get("R3")
-    Rsum = request.form.get("Rsum")
-    EsR1 = request.form.get("EsR1")
-    EsR2 = request.form.get("EsR2")
-    EsR3 = request.form.get("EsR3")
-    EsRsum = request.form.get("EsRsum")
-    EiR1 = request.form.get("EiR1")
-    EiR2 = request.form.get("EiR2")
-    EiR3 = request.form.get("EiR3")
-    EiRsum = request.form.get("EiRsum")
+    form = request.form
+    R1 = form_get_float_safe(form, "R1")
+    R2 = form_get_float_safe(form, "R2")
+    R3 = form_get_float_safe(form, "R3")
+    Rsum = form_get_float_safe(form, "Rsum")
+    EsR1 = form_get_float_safe(form, "EsR1")
+    EsR2 = form_get_float_safe(form, "EsR2")
+    EsR3 = form_get_float_safe(form, "EsR3")
+    EsRsum = form_get_float_safe(form, "EsRsum")
+    EiR1 = form_get_float_safe(form, "EiR1")
+    EiR2 = form_get_float_safe(form, "EiR2")
+    EiR3 = form_get_float_safe(form, "EiR3")
+    EiRsum = form_get_float_safe(form, "EiRsum")
 
-    # ["/usr/bin/git", "commit", "-m", "Fixes a bug."]
+    arguments = [R1, R2, R3, Rsum, EsR1, EsR2, EsR3, EsRsum, EiR1, EiR2, EiR3, EiRsum]
+
+    res = 1
+    for x in arguments: res = res and x
+    if res is None:
+        return "Incorrect input"
+
+    cmd = [str(x) for x in arguments]
 
     path = "Onemetr/solver/task4.bin"
     if current_app.debug:
         path = "solver/task4.bin"
 
-    cmd = [path, R1, R2, R3, Rsum, EsR1, EsR2, EsR3, EsRsum, EiR1, EiR2, EiR3, EiRsum]
+    cmd.insert(0, path)
+    # ["/usr/bin/git", "commit", "-m", "Fixes a bug."]
     print(cmd)
 
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -57,28 +66,37 @@ def task3():
 
 @bp.route("/task3_solution", methods=("POST", ))
 def task3_solution():
-    dmax = request.form.get("dmax")
-    dmin = request.form.get("dmin")
-    Smax = request.form.get("Smax")
-    Smin = request.form.get("Smin")
-    EPCmax = request.form.get("EPCmax")
-    EPCmin = request.form.get("EPCmin")
-    Dmax = request.form.get("Dmax")
-    Dmin = request.form.get("Dmin")
+    form = request.form
+    dmax = form_get_float_safe(form, "dmax")
+    dmin = form_get_float_safe(form, "dmin")
+    Smax = form_get_float_safe(form, "Smax")
+    Smin = form_get_float_safe(form, "Smin")
+    EPCmax = form_get_float_safe(form, "EPCmax")
+    EPCmin = form_get_float_safe(form, "EPCmin")
+    Dmax = form_get_float_safe(form, "Dmax")
+    Dmin = form_get_float_safe(form, "Dmin")
+    method = form_get_int_safe(form, "options")
 
-    method = request.form.get("options")
-    # print(method)
-    # ["/usr/bin/git", "commit", "-m", "Fixes a bug."]
+    arguments = [method, dmax, dmin, Smax, Smin, EPCmax, EPCmin, Dmax, Dmin]
 
+    res = 1
+    for x in arguments: res = res and x
+    if res is None:
+        return "Incorrect input"
+
+    cmd = [str(x) for x in arguments]
+    # print(sarguments)
     path = "Onemetr/solver/task3.bin"
     if current_app.debug:
         path = "solver/task3.bin"
 
-    cmd = [path, method, dmax, dmin, Smax, Smin, EPCmax, EPCmin, Dmax, Dmin]
-    print(cmd)
-
+    # ["/usr/bin/git", "commit", "-m", "Fixes a bug."]
+    cmd.insert(0, path)
+    print("cmd >> ", cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    result = p.wait()
+    prog_result = p.wait()
+    if prog_result != 0:
+        return "Failed: Td / 2 + TD / 2 + TL + TEPC != TS"
     a, b = p.communicate()
     stdout, stderr = a.decode("utf-8"), b.decode("utf-8")
     print("stdout {} >> {}".format(type(stdout), stdout))
@@ -89,5 +107,26 @@ def task3_solution():
     res = stdout.split(" ")
     print(res)
 
-
     return "L = {} mm\nEsL = {} mkm\nEiL = {} mkm".format(res[0], res[1], res[2])
+
+def form_get_int_safe(form, key):
+    _value = form.get(key)
+    if _value is None:
+        return None;
+
+    try:
+        return int(_value)
+    except (ValueError, TypeError):
+        return None
+
+def form_get_float_safe(form, key):
+    _value = form.get(key)
+    if _value is None:
+        return None;
+
+    _value = _value.replace(",", ".")
+
+    try:
+        return float(_value)
+    except (ValueError, TypeError):
+        return None
