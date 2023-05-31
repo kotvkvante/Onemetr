@@ -33,8 +33,6 @@ int main(int argc, char *argv[]) {
     Ei_R3 = stod(argv[11]);
     Ei_R_sum = stod(argv[12]);
 
-
-
     R23 = (R2 * R3) / (R2 + R3);
     R4 = R_sum - R1 - R23;
 
@@ -60,8 +58,7 @@ int main(int argc, char *argv[]) {
     R4_max = R4 + EsR4;
     R4_min = R4 + EiR4;
 
-    cout << R4_max << endl;
-    cout << R4_min << endl;
+    cout << R4_max << " " << R4_min;
 
     return 0;
 }

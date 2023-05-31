@@ -36,12 +36,18 @@ def task4_solution():
         path = "solver/a.out"
 
     cmd = [path, R1, R2, R3, Rsum, EsR1, EsR2, EsR3, EsRsum, EiR1, EiR2, EiR3, EiRsum]
+    print(cmd)
+
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     result = p.wait()
     a, b = p.communicate()
     stdout, stderr = a.decode("utf-8"), b.decode("utf-8")
-    print(stdout, stderr)
+    print("stdout {} >> {}".format(type(stdout), stdout))
+    print("stderr >> ", stderr)
+    if (stdout == ""):
+        return "Incorrect input"
 
+    res = stdout.split(" ")
+    print(res)
 
-    # return "{} {} {} {}".format(r1, r2, r3, r4)
-    return stdout
+    return "Rmax = {}\nRmin = {}".format(res[0], res[1])
