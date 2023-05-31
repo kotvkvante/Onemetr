@@ -1,3 +1,26 @@
+html {
+  font-family: Courier New;
+  background: #132345;
+  padding: 1rem;
+}
+
+body {
+  min-width: 550px;
+  max-width: 960px;
+  margin: auto;
+  background: white;
+}
+
+* {
+  /* font-family: Lato; */
+  margin: 0;
+  padding: 0;
+  --transition: 0.15s;
+  --border-radius: 0.5rem;
+  --background: #ffc107;
+  --box-shadow: #ffc107;
+}
+
 h1 {
   color: #377ba8;
   margin: 1rem 0;
