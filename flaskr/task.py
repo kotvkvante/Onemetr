@@ -90,4 +90,4 @@ def task3_solution():
     print(res)
 
 
-    return "L = {} mm\nEsL = {}mkm\nEiL = {}mkm".format(res[0], res[1], res[2])
+    return "L = {} mm\nEsL = {} mkm\nEiL = {} mkm".format(res[0], res[1], res[2])
