@@ -3,7 +3,7 @@ import sys
 import subprocess
 
 from flask import (
-    Blueprint, render_template, request
+    Blueprint, render_template, request, current_app
 )
 
 bp = Blueprint("task", __name__)
@@ -30,7 +30,12 @@ def task4_solution():
     EiRsum = request.form.get("EiRsum")
 
     # ["/usr/bin/git", "commit", "-m", "Fixes a bug."]
-    cmd = ["solver/a.out", R1, R2, R3, Rsum, EsR1, EsR2, EsR3, EsRsum, EiR1, EiR2, EiR3, EiRsum]
+
+    path = "Onemetr/solver/a.out"
+    if current_app.debug:
+        path = "solver/a.out"
+
+    cmd = [path, R1, R2, R3, Rsum, EsR1, EsR2, EsR3, EsRsum, EiR1, EiR2, EiR3, EiRsum]
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     result = p.wait()
     a, b = p.communicate()
