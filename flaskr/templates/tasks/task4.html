@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Task 4{% endblock %}</h1>
+
+{% endblock %}
+
+{% block content %}
+<form class="" action="index.html" method="post" id="main-form">
+  <div class="task4-form">
+    <div class="">
+      <label for="R1" class="task4-label">R1</label>
+      <input id="R1" class="task4-input" type="text" name="R1" value="">
+    </div>
+    <div class="">
+      <label for="EsR1" class="task4-label">EsR1</label>
+      <input id="EsR1" class="task4-input" type="text" name="EsR1" value="">
+    </div>
+
+    <div class="">
+      <label for="EiR1" class="task4-label">EiR1</label>
+      <input id="EiR1" class="task4-input" type="text" name="EiR1" value="">
+
+    </div>
+    <div class="">
+      <label for="R2" class="task4-label">R2 </label>
+      <input id="R2" class="task4-input" type="text" name="R2" value="">
+
+    </div>
+    <div class="">
+      <label for="EsR2" class="task4-label">EsR2</label>
+      <input id="EsR2" class="task4-input" type="text" name="EsR2" value="">
+    </div>
+
+    <div class="">
+      <label for="EiR2" class="task4-label">EiR2</label>
+      <input id="EiR2" class="task4-input" type="text" name="EiR2" value="">
+    </div>
+
+    <div class="">
+      <label for="R3" class="task4-label">R3 </label>
+      <input id="R3" class="task4-input" type="text" name="R3" value="">
+
+    </div>
+    <div class="">
+      <label for="EsR3" class="task4-label">EsR3</label>
+      <input id="EsR3" class="task4-input" type="text" name="EsR3" value="">
+
+    </div>
+    <div class="">
+      <label for="EiR3" class="task4-label">EiR3</label>
+      <input id="EiR3" class="task4-input" type="text" name="EiR3" value="">
+
+    </div>
+    <div class="">
+      <label for="Rsum" class="task4-label">Rsum </label>
+      <input id="Rsum" class="task4-input" type="text" name="Rsum" value="">
+
+    </div>
+    <div class="">
+      <label for="EsRsum" class="task4-label">EsRsum</label>
+      <input id="EsRsum" class="task4-input" type="text" name="EsRsum" value="">
+
+    </div>
+    <div class="">
+      <label for="EiRsum" class="task4-label">EiRsum</label>
+      <input id="EiRsum" class="task4-input" type="text" name="EiRsum" value="">
+
+    </div>
+
+  </div>
+
+  <button type="submit" name="button">Solve</button>
+</form>
+
+<div class="" id="solution">
+
+</div>
+
+<script type="text/javascript">
+  window.onload = function() {
+    const form = document.getElementById("main-form");
+    const solution = document.getElementById("solution");
+    // img_div.innerHtml = "AAA";
+    form.addEventListener("submit", function(event) {
+      event.preventDefault(); // prevent page from refreshing
+      const formData = new FormData(form); // grab the data inside the form fields
+      fetch('/task4_solution', { // assuming the backend is hosted on the same server
+          method: "POST",
+          body: formData,
+        })
+        .then(response => {
+          return response.text();
+        })
+        .then(html => {
+          solution.innerHTML = html;
+          // console.log(html);
+        })
+
+    });
+  }
+</script>
+
+{% endblock %}

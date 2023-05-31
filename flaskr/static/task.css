@@ -1,0 +1,13 @@
+.task4-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.task4-label {
+  display: inline-block;
+  width: 75px;
+}
+
+.task4-input {
+  width: 80px;
+}

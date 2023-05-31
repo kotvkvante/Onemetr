@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<title>{% block title %} {% endblock %} - Onemetr </title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='task.css') }}">
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+{% block styles %}{% endblock %}
+<nav>
+  <div class="navbar_container">
+        <ul class="menu">
+            <strong>
+              <li class="nv-title nv-elem"><a href="{{ url_for('home.home') }}" class="navbar-title">Shmel</a></li>
+            </strong>
+            <li class="nv-elem"><a href="{{ url_for('task.task4') }}">Solve</a></li>
+
+          </ul>
+  </div>
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</section>
