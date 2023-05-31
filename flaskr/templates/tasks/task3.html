@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Task 3{% endblock %}</h1>
+
+{% endblock %}
+
+{% block content %}
+<form class="" action="index.html" method="post" id="main-form">
+  <div class="task4-form">
+    <div class="">
+      <label for="dmax" class="task4-label">dmax</label>
+      <input id="dmax" class="task4-input" type="text" name="dmax" value="">
+    </div>
+
+    <div class="">
+      <label for="dmin" class="task4-label">dmin</label>
+      <input id="dmin" class="task4-input" type="text" name="dmin" value="">
+    </div>
+
+    <div class="">
+      <label for="Smax" class="task4-label">Smax</label>
+      <input id="Smax" class="task4-input" type="text" name="Smax" value="">
+
+    </div>
+
+    <div class="">
+      <label for="Smin" class="task4-label">Smin </label>
+      <input id="Smin" class="task4-input" type="text" name="Smin" value="">
+    </div>
+
+    <div class="">
+      <label for="EPCmax" class="task4-label">EPCmax</label>
+      <input id="EPCmax" class="task4-input" type="text" name="EPCmax" value="">
+    </div>
+
+    <div class="">
+      <label for="EPCmin" class="task4-label">EPCmin</label>
+      <input id="EPCmin" class="task4-input" type="text" name="EPCmin" value="">
+    </div>
+
+    <div class="">
+      <label for="Dmax" class="task4-label">Dmax</label>
+      <input id="Dmax" class="task4-input" type="text" name="Dmax" value="">
+    </div>
+
+    <div class="">
+      <label for="Dmin" class="task4-label">Dmin</label>
+      <input id="Dmin" class="task4-input" type="text" name="Dmin" value="">
+    </div>
+
+    <div class="">
+      <fieldset>
+        <label for="Max-min" class="task4-label">Max-min</label>
+        <input id="Max-min" type="radio" name="options" value="1">
+        <label for="Probability" class="task4-label">Prob-ty</label>
+        <input id="Probability" type="radio" name="options" value="2">
+
+      </fieldset>
+    </div>
+
+    <div class="">
+
+      <button type="submit" name="button" class="task4-submit">Solve</button>
+    </div>
+  </div>
+
+</form>
+
+
+<div class="task4-solution" id="solution">
+  <!-- <pre class="task4-solution" id="solution"> -->
+
+  <!-- </pre> -->
+</div>
+
+<script type="text/javascript">
+  window.onload = function() {
+    const form = document.getElementById("main-form");
+    const solution = document.getElementById("solution");
+    // img_div.innerHtml = "AAA";
+    form.addEventListener("submit", function(event) {
+      event.preventDefault(); // prevent page from refreshing
+      const formData = new FormData(form); // grab the data inside the form fields
+      fetch('/task3_solution', { // assuming the backend is hosted on the same server
+          method: "POST",
+          body: formData,
+        })
+        .then(response => {
+          return response.text();
+        })
+        .then(res => {
+          solution.innerHTML = res;
+          // console.log(html);
+        })
+
+    });
+  }
+</script>
+
+{% endblock %}
