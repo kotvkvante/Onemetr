@@ -29,7 +29,6 @@ def task4_solution():
     EiR3 = request.form.get("EiR3")
     EiRsum = request.form.get("EiRsum")
 
-    if(R1)
     # ["/usr/bin/git", "commit", "-m", "Fixes a bug."]
 
     path = "Onemetr/solver/a.out"
