@@ -56,7 +56,10 @@ int main(int argc, char *argv[])
         TEPC = EsEPC - EiEPC;
         TL = EsL - EiL;
 
-        if (Td / 2 + TD / 2 + TL + TEPC != TS) { cout << "���-�� ����� �� ���..."; }
+        if (Td / 2 + TD / 2 + TL + TEPC != TS)
+        {
+           return -1;
+        }
 
         EsL = EsL * 1000;
         EiL = EiL * 1000;
