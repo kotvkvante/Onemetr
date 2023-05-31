@@ -16,3 +16,9 @@
 .task4-submit {
   width: 155px;
 }
+
+.task4-solution {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}

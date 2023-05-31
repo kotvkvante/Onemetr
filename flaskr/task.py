@@ -16,12 +16,21 @@ def task4():
 
 @bp.route("/task4_solution", methods=("POST", ))
 def task4_solution():
-    r1 = request.form.get("R1")
-    r2 = request.form.get("R2")
-    r3 = request.form.get("R3")
-    r4 = request.form.get("Rsum")
+    R1 = request.form.get("R1")
+    R2 = request.form.get("R2")
+    R3 = request.form.get("R3")
+    Rsum = request.form.get("Rsum")
+    EsR1 = request.form.get("EsR1")
+    EsR2 = request.form.get("EsR2")
+    EsR3 = request.form.get("EsR3")
+    EsRsum = request.form.get("EsRsum")
+    EiR1 = request.form.get("EiR1")
+    EiR2 = request.form.get("EiR2")
+    EiR3 = request.form.get("EiR3")
+    EiRsum = request.form.get("EiRsum")
+
     # ["/usr/bin/git", "commit", "-m", "Fixes a bug."]
-    cmd = ["solver/a.out"]
+    cmd = ["solver/a.out", R1, R2, R3, Rsum, EsR1, EsR2, EsR3, EsRsum, EiR1, EiR2, EiR3, EiRsum]
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     result = p.wait()
     a, b = p.communicate()
