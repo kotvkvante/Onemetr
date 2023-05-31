@@ -1,4 +1,3 @@
+## About The Project
 Web interface for solving two exercises in metrology.
-
-Solver C++
-Web Python/Flask
+Solver written in C++ and Web in Python using Flask framework.
